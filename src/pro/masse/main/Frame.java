@@ -8,7 +8,7 @@ public class Frame {
     public JPanel gameView;
 
     public static int gameViewWidth = 1600;
-    public static int gameViewHeight = gameViewWidth / 16 * 3;
+    public static int gameViewHeight = gameViewWidth / 16 * 9;
 
     public Frame() {
         initFrame();
@@ -20,7 +20,6 @@ public class Frame {
         frame.getContentPane().add(gameView);
         frame.setBounds((1920-gameViewWidth)/2,(1080-gameViewHeight)/2, gameViewWidth, gameViewHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frame.setVisible(true);
     }
 }

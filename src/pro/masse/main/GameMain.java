@@ -7,6 +7,12 @@ public class GameMain {
 
     private static boolean running;
 
+    public static void start() {
+        window = new Frame();
+        if (running) return;
+        running = true;
+    }
+
     private static void update(double deltaTime) {
 
     }
@@ -24,12 +30,12 @@ public class GameMain {
 
         while (running) {
             long now = System.nanoTime();
-            long updateLenght = now - lastLoopTime;
+            long updateLength = now - lastLoopTime;
             lastLoopTime = now;
 
-            double deltaTime = updateLenght / nanoSecondPerTick;
+            double deltaTime = updateLength / nanoSecondPerTick;
 
-            lastFpsTime += updateLenght;
+            lastFpsTime += updateLength;
             fps++;
 
             if (lastFpsTime >= Math.pow(10,9)) {
@@ -49,5 +55,17 @@ public class GameMain {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void stop() {
+        if (!running) return;
+        running = false;
+    }
+
+    public static void main(String[] args) {
+
+        start();
+
+        gameLoop();
     }
 }
