@@ -5,13 +5,13 @@ public class GameMain {
     public static Frame window;
     public static int fps;
 
-    private boolean running;
+    private static boolean running;
 
-    private static void tick() {
+    private static void update(double deltaTime) {
 
     }
 
-    private static void render() {
+    private static void render(double deltaTime) {
 
     }
 
@@ -22,25 +22,26 @@ public class GameMain {
         long lastLoopTime = System.nanoTime();
         double nanoSecondPerTick = Math.pow(10,9) / targetFPS;
 
-        while (true) {
+        while (running) {
             long now = System.nanoTime();
             long updateLenght = now - lastLoopTime;
             lastLoopTime = now;
 
-            double timePerFrame = updateLenght / nanoSecondPerTick;
+            double deltaTime = updateLenght / nanoSecondPerTick;
 
-            lastFpsTime -= updateLenght;
+            lastFpsTime += updateLenght;
             fps++;
 
             if (lastFpsTime >= Math.pow(10,9)) {
+                System.out.println("FPS: " + fps);
                 GameView.fps = fps;
                 lastFpsTime = 0;
                 fps = 0;
             }
 
-            tick();
+            update(deltaTime);
 
-            render();
+            render(deltaTime);
 
             try {
                 Thread.sleep((long) (Math.abs((lastLoopTime - System.nanoTime()) + nanoSecondPerTick)/Math.pow(10,9)));
