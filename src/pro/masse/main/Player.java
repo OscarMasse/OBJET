@@ -2,6 +2,8 @@ package pro.masse.main;
 
 public class Player extends Entity {
 
+    public float velocityX, velocityY;
+
     Player() {
         posY = 64;
     }

@@ -25,20 +25,6 @@ public class Display {
     private static GLFWErrorCallback errorCallback
             = GLFWErrorCallback.createPrint(System.err);
 
-    /**
-     * This key callback will check if ESC is pressed and will close the window
-     * if it is pressed.
-     */
-    private static GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
-
-        @Override
-        public void invoke(long window, int key, int scancode, int action, int mods) {
-            if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-                glfwSetWindowShouldClose(window, true);
-            }
-        }
-    };
-
     public Display(GameMain gameMain, int width, int height, String title) {
 
         /* Set the error callback */
@@ -74,10 +60,13 @@ public class Display {
 //        glfwSwapInterval(1);
 
         /* Set the key callback */
-        glfwSetKeyCallback(id, keyCallback);
+        glfwSetKeyCallback(id, gameMain.getInputManager().getKeyCallback());
 
         widthBuffer = MemoryUtil.memAllocInt(1);
         heightBuffer = MemoryUtil.memAllocInt(1);
+
+        this.width = width;
+        this.height = height;
 
         this.gameMain = gameMain;
     }
@@ -111,7 +100,7 @@ public class Display {
 
         /* Release window and its callbacks */
         glfwDestroyWindow(id);
-        keyCallback.free();
+        gameMain.getInputManager().getKeyCallback().free();
 
         /* Terminate GLFW and release the error callback */
         glfwTerminate();

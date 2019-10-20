@@ -9,16 +9,15 @@ public class GameMain {
 
     private boolean running;
     private Display display;
-    private Timer timer;
     private Scene loadedScene;
     private Graphics2D graphics2D;
-
-    public static int fps;
+    private InputManager inputManager;
 
     public void start() {
         if (running) return;
         running = true;
 
+        inputManager = new InputManager(this);
         display = new Display(this, 1600, 900, "Game Title");
         loadedScene = new Scene();
 
@@ -40,43 +39,24 @@ public class GameMain {
 
     public void gameLoop() {
 
-        int targetFPS = 144;
-        int lastFpsTime = 0;
-        long lastLoopTime = System.nanoTime();
-        double nanoSecondPerTick = Math.pow(10,9) / targetFPS;
+        /* Set viewport and clear screen */
+        GL11.glViewport(0, 0, display.getWidth(), display.getHeight());
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+
+        /* Set ortographic projection */
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0f, 400f, 225f, 0f, 1f, -1f);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
         while (running) {
 
-
-
-            long now = System.nanoTime();
-            long updateLength = now - lastLoopTime;
-            lastLoopTime = now;
-
-            double deltaTime = updateLength / nanoSecondPerTick;
-
-            lastFpsTime += updateLength;
-            fps++;
-
-            if (lastFpsTime >= Math.pow(10,9)) {
-                System.out.println("FPS: " + fps);
-                lastFpsTime = 0;
-                fps = 0;
-            }
+            Time.update();
 
             display.update();
 
-            /* Set viewport and clear screen */
-            GL11.glViewport(0, 0, display.getWidth(), display.getHeight());
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-
-            /* Set ortographic projection */
-            GL11.glMatrixMode(GL11.GL_PROJECTION);
-            GL11.glLoadIdentity();
-            GL11.glOrtho(0f, 400f, 225f, 0f, 1f, -1f);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
             loadedScene.update();
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
             loadedScene.render(graphics2D);
         }
     }
@@ -91,5 +71,9 @@ public class GameMain {
         GameMain gameMain = new GameMain();
 
         gameMain.start();
+    }
+
+    public InputManager getInputManager() {
+        return this.inputManager;
     }
 }

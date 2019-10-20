@@ -2,11 +2,12 @@ package pro.masse.main;
 
 public class Entity implements Renderable {
 
-    protected float posX;
-    protected float posY;
+    protected float posX, posY;
+    protected float lastPosX, lastPosY;
 
     public void update() {
-
+        lastPosX = posX;
+        lastPosY = posY;
     }
 
     @Override
