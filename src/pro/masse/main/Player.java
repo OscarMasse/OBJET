@@ -10,7 +10,20 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        posX += .5f;
+        super.update();
+        float deltaTime = Time.getDeltaTime();
+
+        if(posY > 20f) {
+            velocityY -= 9.81f;
+        }
+
+        posX += velocityX * deltaTime;
+        posY += velocityY * deltaTime;
+
+        if(posY < 20f)  {
+            posY = 20f;
+            velocityY = 0f;
+        }
     }
 
     @Override

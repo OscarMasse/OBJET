@@ -12,6 +12,7 @@ public class GameMain {
     private Scene loadedScene;
     private Graphics2D graphics2D;
     private InputManager inputManager;
+    private Player player;
 
     public void start() {
         if (running) return;
@@ -22,7 +23,7 @@ public class GameMain {
         loadedScene = new Scene();
 
         ///////////////////////////////////////
-        loadedScene.addEntity(new Player());
+        loadedScene.addEntity(player = new Player());
         graphics2D = new Graphics2D();
         ///////////////////////////////////////
 
@@ -67,5 +68,9 @@ public class GameMain {
 
     public InputManager getInputManager() {
         return this.inputManager;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 }

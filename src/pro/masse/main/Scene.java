@@ -11,6 +11,11 @@ public class Scene {
     public Scene(){
         entities = new LinkedList<>();
         renderables = new LinkedList<>();
+
+        renderables.add((graphics2D) -> {
+            graphics2D.setColor(.5f,  .5f,  .5f);
+            graphics2D.drawRect(0, 0, 256f, 20f);
+        });
     }
 
     public void update() {
