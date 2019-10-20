@@ -29,14 +29,6 @@ public class GameMain {
         gameLoop();
     }
 
-    private void update(double deltaTime) {
-
-    }
-
-    private void render(double deltaTime) {
-
-    }
-
     public void gameLoop() {
 
         /* Set viewport and clear screen */
@@ -46,7 +38,7 @@ public class GameMain {
         /* Set ortographic projection */
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0f, 400f, 225f, 0f, 1f, -1f);
+        GL11.glOrtho(0f, 400f, 0f, 225f, 1f, -1f);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
         while (running) {
