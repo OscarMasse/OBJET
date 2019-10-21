@@ -44,7 +44,7 @@ public class InputManager {
                 }
 
                 if(key == GLFW_KEY_UP && action == GLFW_PRESS && gameMain.getPlayer().posY <= 20f) {
-                    gameMain.getPlayer().velocityY = 10f;
+                    gameMain.getPlayer().velocityY = 3f;
                 }
 
                 gameMain.getPlayer().velocityX = 0f - (leftInput ? 40f : 0f) + (rightInput ? 40f : 0f);

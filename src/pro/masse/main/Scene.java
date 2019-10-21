@@ -14,7 +14,7 @@ public class Scene {
 
         renderables.add((graphics2D) -> {
             graphics2D.setColor(.5f,  .5f,  .5f);
-            graphics2D.drawRect(0, 0, 256f, 20f);
+            graphics2D.drawRect(0, 0, 400f, 20f);
         });
     }
 
